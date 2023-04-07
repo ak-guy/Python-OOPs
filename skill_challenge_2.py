@@ -33,6 +33,7 @@
 
 from string import ascii_letters, punctuation
 from random import choices
+from copy import copy
 
 class Password():
     """A password of customize strength and length.
@@ -64,12 +65,12 @@ class Password():
     def show_input_universe(cls):
         return cls.universal_numbers
 
-    def __init__(self, strength="high", length=None):
+    def __init__(self, strength="mid", length=None):
         self.strength = strength
         self.length = length
 
     def _generatePassword(self):
-        combination = self.universal_numbers["letters"]
+        combination = copy(self.universal_numbers["letters"])
         length = self.length or self.default_length[self.strength]     
 
         if self.strength == 'mid':
