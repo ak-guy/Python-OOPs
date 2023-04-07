@@ -70,6 +70,12 @@ class Password():
         self.length = length
 
     def _generatePassword(self):
+        """ 
+        combination = self.universal_numbers["letters"] 
+        -> here combination refers to place in memory,
+        if it changes in previous iteration then that change will also reflect in current iteration.
+        So to overcome this we use copy of universal_numbers.
+        """
         combination = copy(self.universal_numbers["letters"])
         length = self.length or self.default_length[self.strength]     
 
