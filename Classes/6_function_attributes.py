@@ -48,6 +48,18 @@ print(obj.say_hello()) # now this wont throw exception
 print(MyClass.say_hello('Null'))
 
 '''
+Also another way to add arg will be
+'''
+class MyClass:
+    language = 'Python'
+    def say_hello(*args):
+        print(f"Hello there, {args}")
+
+print(MyClass.say_hello())
+obj = MyClass()
+print(obj.say_hello())
+
+'''
 when we pass in object as a parameter in a function then we can
 use its attribute there
 '''
@@ -61,3 +73,49 @@ obj = MyClass()
 print(obj.say_hello())
 obj.language = 'Java'
 print(obj.say_hello())
+
+
+class Person:
+    name = 'Default Name'
+
+    def set_name(instance_obj, name): # usual convention is to replace instance_obj with self keyword
+        instance_obj.name = name
+
+    def reset_name(self):
+        self.name = Person.name
+
+p = Person()
+p.set_name('Arpit')
+print(p.__dict__)
+p.reset_name()
+print(p.__dict__)
+
+p = Person()
+Person.set_name(p, 'Ankit')
+print(p.__dict__)
+p.reset_name()
+print(p.__dict__)
+
+'''
+creating an attribute in class at runtime
+'''
+
+class Person:
+    name = 'Default Name'
+
+    def set_name(instance_obj, name): # usual convention is to replace instance_obj with self keyword
+        instance_obj.name = name
+
+    def reset_name(self):
+        self.name = Person.name
+
+p = Person()
+
+Person.do_work = lambda self: print(f'do_work is called from {self}')
+print(Person.__dict__) # 'do_work': <function <lambda> at 0x7f8219c160e0>
+print(p.do_work) # <bound method <lambda> of <__main__.Person object at 0x7ff01104fac0>>
+p.do_work()
+
+p.another_work = lambda *self: print(f'here another work is being created in an instance hence it wont be available in main class {self}')
+print(p.another_work)
+p.another_work()
