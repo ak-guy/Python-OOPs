@@ -1,3 +1,19 @@
+class Person:
+    def __init__(self, name) -> None:
+        self.set_name(name)
+
+    def get_name(self):
+        return self._name
+    
+    def set_name(self, name):
+        if isinstance(name, str) and len(name.strip()) > 0:
+            self._name = name
+        else:
+            raise ValueError('Name must be non empty string')
+        
+obj1 = Person('Arpit')
+print(obj1.get_name())
+
 '''
 sometimes assigning a value directly to an instance attribute does not make sense
 like suppose we have to add additional validation before we assign any value to
@@ -18,15 +34,24 @@ class MyClass:
         self._name = name
 
     def get_language(self):
+        print(f'getter called... getting attribute -> _language')
         return self._language
     
     def set_language(self, language):
+        print(f'setter called... setting _language as  "{language}"')
         self._name = 'Arpit' # setting _name as 'Arpit' whenever we set language
         self._language = language
 
-    language = property(fget=get_language, fset=set_language)
+    def del_language(self):
+        print('deleter called...')
+        del self._language
+
+    language = property(fget=get_language, fset=set_language,fdel=del_language)
 
 obj = MyClass('Python')
+print(MyClass.__dict__.get('language'))
 print(obj.__dict__) # {'_language': 'Python', '_name': None}
 obj.language = 'Java' # here we are language instead of _language because we used property class and assigned it to language
-print(obj.language, obj._name)
+print(obj.language + ' -> ' +  obj._name)
+del obj.language
+print(obj.__dict__)
