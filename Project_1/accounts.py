@@ -44,7 +44,7 @@ class Accounts:
         return self._account_number
         
     @property
-    def first_name(self, value):
+    def first_name(self):
         return self._first_name
     
     @first_name.setter
@@ -52,13 +52,16 @@ class Accounts:
         self._first_name = Accounts.validateName(value, 'First Name')
         
     @property
-    def last_name(self, value):
+    def last_name(self):
         return self._last_name
     
     @last_name.setter
     def last_name(self,value):
         self._last_name = Accounts.validateName(value, 'Last Name')
 
+    @property
+    def full_name(self):
+        return f'{self.first_name} {self.last_name}'
     # making balance read-only
     @property
     def initial_balance(self):
