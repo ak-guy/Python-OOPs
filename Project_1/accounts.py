@@ -13,7 +13,7 @@ class Accounts:
     _TRANSACTION_CODES = {
         'Deposit': 'D',
         'Withdraw': 'W',
-        'Wnterest': 'I',
+        'Interest': 'I',
         'Rejected': 'X'
     }
 
@@ -144,17 +144,19 @@ class Accounts:
 
     def addInterest(self):
         conf_code = self.generate_confirmation_code(Accounts._TRANSACTION_CODES['Interest'])
-        self._balance += (1 + Accounts.getInterestRate())
+        self._balance *= (1 + Accounts.getInterestRate())
         return conf_code
 
 if __name__ == '__main__':
     account_no = ''.join(str(random.randint(0,9)) for i in range(0,6))
-    try:
-        obj1 = Accounts(account_no,'Arpit','kumar',TimeZone('IST', 5, 30), 200)
-        for i in range(3):
-            print(obj1.deposit(100))
-            print(obj1._balance)
-        print(obj1.withdraw(600))
-        print(obj1._balance)
-    except Exception as e:
-        print(e)
+    a = Accounts('A100', 'Eric', 'Idle', timezone=TimeZone('MST', -7, 0), initial_balance=100)
+    print(a._balance)
+    print(a.deposit(150.02))
+    print(a._balance)
+    print(a.withdraw(0.02))
+    print(a._balance)
+    Accounts.setInterestRate(0.01)
+    print(a.getInterestRate())
+    print(a.addInterest())
+    print(a._balance)
+    print(a.withdraw(1000))
