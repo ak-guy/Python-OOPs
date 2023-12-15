@@ -14,3 +14,10 @@ p = Person('Arpit', 24)
 if False:
     print(p.__dict__()) # this will attribute error because python now no longer has attribute __dict__, because we defined in slots that only 'name' and 'age' should exists
     p.style = 'Rambo' # this also will give attribute error as we cannot create new attributes
+
+# but we can add and change attributes at class level
+print(Person.__dict__)
+Person.name = 'Ankit'
+Person.age = 27
+print('\n')
+print(Person.__dict__)
