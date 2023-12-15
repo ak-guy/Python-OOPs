@@ -2,7 +2,7 @@
 Slots : __slots__ is used to tell python that we will be using only certain pre-determined attributes
         python will then use a more compact data structure to store those attributes (not in dict)
         
-        __slots__ are useful for better memory and speed but it comes at a cost of complexity and maintanence
+        __slots__ are useful it uses less memory(by limiting func to provided slots) and faster attributes access but it comes at a cost of complexity and maintanence
 '''
 class Person:
     __slots__ = ('name', 'age')
