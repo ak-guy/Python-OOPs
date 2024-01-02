@@ -7,7 +7,7 @@ Descriptors: Python descriptors are created to manage the attributes of differen
              method that needs to be defined in Descriptor class
              1. __get__
              2. __set__
-             3. __name__
+             3. __delete__
 '''
 
 from datetime import datetime
